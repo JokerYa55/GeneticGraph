@@ -3,21 +3,29 @@ package controllers;
 import gen_item.ResultItem;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 public class GraphController extends AnchorPane {
+
+    private static final Logger LOG = Logger.getLogger(GraphController.class.getName());
 
     private Parent root;
 
     @FXML
     LineChart<String, Double> idChart;
+
+    @FXML
+    Button idBtnStart;
 
     public GraphController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/GraphController.fxml"));
@@ -62,6 +70,11 @@ public class GraphController extends AnchorPane {
 
     @FXML
     private void initialize() {
+    }
+
+    @FXML
+    public void btnStartClick(ActionEvent actionEvent) {
+        LOG.info(String.format("action = %s", actionEvent));
     }
 
     public void showGraph(List<ResultItem>... data) {
