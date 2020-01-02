@@ -3,7 +3,6 @@ package controllers;
 import gen_item.Bot;
 import gen_item.BotBase;
 import gen_item.BotResult;
-import gen_item.ResultItem;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
