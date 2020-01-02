@@ -1,6 +1,8 @@
 package controllers;
 
 import gen_item.Bot;
+import gen_item.BotBase;
+import gen_item.BotResult;
 import gen_item.ResultItem;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -21,11 +23,12 @@ public class GraphController extends AnchorPane {
 
     private static final Logger LOG = Logger.getLogger(GraphController.class.getName());
 
-    private static final int COUNT = 10;
+    private static final int COUNT = 50;
     private static final int a = 0;
     private static double b = 10;
     private static final double DELTA_X = (b - a) / COUNT;
     private Parent root;
+    double[] x = new double[COUNT];
 
     @FXML
     LineChart<String, Double> idChart;
@@ -44,6 +47,10 @@ public class GraphController extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
+        for (int i = 0; i < COUNT; i++) {
+            x[i] = a + i * DELTA_X;
+        }
+
         idChart.setTitle("Series");
 
     }
@@ -60,32 +67,42 @@ public class GraphController extends AnchorPane {
     public void btnStartClick(ActionEvent actionEvent) {
         LOG.info(String.format("action = %s", actionEvent));
         // Генерируем массив bot
-        double[] x = new double[COUNT];
-        for (int i = 0; i < COUNT; i++) {
-            x[i] = a + i * DELTA_X;
-        }
-        List<List<ResultItem>> listItem = new LinkedList<>();
+
+        List<BotResult> listItem = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             Bot bot = new Bot(x);
             bot.calc();
-            listItem.add(bot.getResultList());
+            listItem.add(bot.getResult());
         }
 
         showGraph(listItem);
     }
 
-    public void showGraph(List<List<ResultItem>> dataList) {
+    public void showGraph(List<BotResult> dataList) {
         idChart.getData().clear();
+        //Рисуем sin
+        BotBase base = new BotBase(x);
+        base.calc();
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("sin(x)");
+        ObservableList<XYChart.Data> datas = FXCollections.observableArrayList();
+        base.getResultList().forEach((t1) -> {
+            datas.add(new XYChart.Data<String, Double>(t1.getX() + "", t1.getFx()));
+        });
+        series1.setData(datas);
+        idChart.setCreateSymbols(false);
+        idChart.getData().add(series1);
+
         dataList.forEach((t) -> {
-            XYChart.Series series1 = new XYChart.Series();
-            series1.setName("f");
-            ObservableList<XYChart.Data> datas = FXCollections.observableArrayList();
-            t.forEach((t1) -> {
-                datas.add(new XYChart.Data<String, Double>(t1.getX() + "", t1.getFx()));
+            XYChart.Series series2 = new XYChart.Series();
+            series2.setName(t.getName());
+            ObservableList<XYChart.Data> datas1 = FXCollections.observableArrayList();
+            t.getResltCalc().forEach((t1) -> {
+                datas1.add(new XYChart.Data<String, Double>(t1.getX() + "", t1.getFx()));
             });
-            series1.setData(datas);
+            series2.setData(datas1);
             idChart.setCreateSymbols(false);
-            idChart.getData().add(series1);
+            idChart.getData().add(series2);
         });
 
     }
