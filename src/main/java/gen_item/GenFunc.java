@@ -7,7 +7,7 @@ public class GenFunc implements CalcInterface{
 
     @Override
     public double calc(double x) {
-        return sin(x);
+        return 700*sin(x);
     }
     
 }

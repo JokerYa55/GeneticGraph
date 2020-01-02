@@ -6,15 +6,20 @@ import java.util.Random;
 
 public class Bot {
 
+    private static int count = 0;
     // Результаты вычисления функции
-    private final List<ResultItem> resultList = new ArrayList<>();
+    private final BotResult result = new BotResult();
     // ax^3 + bx^2 + cx + d
     private double a, b, c, d;
     private double[] x;
+    private final String name;
 
     public Bot(double... x) {
         this.x = x;
         initDnk();
+        count++;
+        name = "f_" + count;
+        result.setName(name);
     }
 
     public void initDnk() {
@@ -36,7 +41,7 @@ public class Bot {
         }
         if (random.nextBoolean()) {
             this.d = -random.nextDouble();
-        } else{
+        } else {
             this.d = random.nextDouble();
         }
     }
@@ -44,17 +49,19 @@ public class Bot {
     public void calc() {
         BotFunc funk = new BotFunc();
         CalcInterface genFunc = new GenFunc();
+        List<ResultItem> resultList = new ArrayList();
         for (int i = 0; i < x.length; i++) {
             ResultItem item = new ResultItem();
             item.setX(x[i]);
             item.setFx(funk.calc(x[i], a, b, c, d));
             resultList.add(item);
         }
+        result.setResltCalc(resultList);
 
     }
 
-    public List<ResultItem> getResultList() {
-        return resultList;
+    public BotResult getResult() {
+        return result;
     }
 
 }
