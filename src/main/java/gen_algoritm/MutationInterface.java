@@ -7,5 +7,5 @@ package gen_algoritm;
  */
 public interface MutationInterface {
 
-    PopulationItem mutate(PopulationItem item);
+    PopulationItemInterface mutate(PopulationItemInterface item);
 }

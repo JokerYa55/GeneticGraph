@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface PopulationInterface<T, V> {
 
-    List<PopulationItem<T, V>> getPipulationItemList();
+    List<PopulationItemInterface<T, V>> getPipulationItemList();
 }

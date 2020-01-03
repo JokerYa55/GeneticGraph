@@ -5,10 +5,6 @@ import gen_algoritm.GenInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author admin
- */
 public class GraphicGen implements GenInterface<Double> {
 
     private final List<AlelInterface<Double>> alelList = new ArrayList<>(4);

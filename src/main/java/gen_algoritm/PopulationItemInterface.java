@@ -7,11 +7,13 @@ package gen_algoritm;
  * @param <T> - Тип гена
  * @param <V> - Тип Функции оценки эффективности
  */
-public interface PopulationItem<T, V> {
+public interface PopulationItemInterface<T, V> {
 
     String getName();
 
     T getGen();
 
     V getCriteriaResult(); // Получить значение критерия для оценки
+    
+    PopulationItemInterface<T, V> init();
 }
