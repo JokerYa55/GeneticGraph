@@ -22,5 +22,10 @@ public class FuncItem implements CalcInterface<Double, Double, AlelInterface<Dou
         result.setY(res);
         return result;
     }
+
+    @Override
+    public CalcResultInterface<Double, Double> calc(Double x) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

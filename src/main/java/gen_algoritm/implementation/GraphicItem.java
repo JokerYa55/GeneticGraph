@@ -1,26 +1,31 @@
 package gen_algoritm.implementation;
 
-import gen_algoritm.AlelInterface;
 import gen_algoritm.CalcInterface;
 import gen_algoritm.CalcResultInterface;
 import gen_algoritm.GenInterface;
 import gen_algoritm.PopulationItemInterface;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class GraphicItem implements PopulationItemInterface<Double, GenInterface<Double>, Double> {
 
-    private final GenInterface<Double> gen = new GraphicGen();
+    private GenInterface<Double> gen = new GraphicGen();
     private final String name;
-    private final CalcInterface<Double, Double, Double> func;
+    // Функция для генов
+    private final CalcInterface<Double, Double, Double> genFunc;
+    // Функция базовая
+    private final CalcInterface<Double, Double, Double> baseFunc;
     private Double criteriaResult = 0d;
-    private List<CalcResultInterface<Double, Double>> resultList = new ArrayList<>();
+    // Результаты вычисления базовой функции на интервале
+    private final List<CalcResultInterface<Double, Double>> baseResultList = new ArrayList<>();
+    // Результаты вычисления гена на интервале.
+    private final List<CalcResultInterface<Double, Double>> genResultList = new ArrayList<>();
 
-    public GraphicItem(String name, CalcInterface<Double, Double, Double> func) {
+    public GraphicItem(String name, CalcInterface<Double, Double, Double> genFunc, CalcInterface<Double, Double, Double> baseFunc) {
         this.name = name;
-        this.func = func;
+        this.genFunc = genFunc;
+        this.baseFunc = baseFunc;
         init();
     }
 
@@ -58,17 +63,21 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
 
     // Получить расчитаные значения функции в точках
     public List<CalcResultInterface<Double, Double>> getResultList() {
-        return resultList;
+        return genResultList;
     }
 
     public GraphicItem calc(Double... x) {
         for (Double itemX : x) {
             CalcResultInterface<Double, Double> res = new FuncItemResult();
             res.setX(itemX);
-            res.setY(func.calc(itemX, gen.getGenAsArray()).getY());
-            resultList.add(res);
+            res.setY(genFunc.calc(itemX, gen.getGenAsArray()).getY());
+            genResultList.add(res);
         }
         return this;
+    }
+
+    public void setGen(GenInterface<Double> gen) {
+        this.gen = gen;
     }
 
 }

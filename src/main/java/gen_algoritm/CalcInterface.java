@@ -9,5 +9,8 @@ package gen_algoritm;
  */
 public interface CalcInterface<T, V, P> {
 
+    CalcResultInterface<T, V> calc(T x);
+
     CalcResultInterface<T, V> calc(T x, P... param);
+
 }
