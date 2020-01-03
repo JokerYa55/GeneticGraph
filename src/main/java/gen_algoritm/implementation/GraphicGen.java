@@ -11,7 +11,10 @@ import java.util.List;
  */
 public class GraphicGen implements GenInterface<Double> {
 
-    private final List<AlelInterface<Double>> alelList = new ArrayList<>();
+    private final List<AlelInterface<Double>> alelList = new ArrayList<>(4);
+
+    public GraphicGen() {
+    }
 
     @Override
     public List<AlelInterface<Double>> getGen() {

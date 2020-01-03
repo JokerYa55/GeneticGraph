@@ -5,7 +5,7 @@ package gen_algoritm;
  *
  * @author admin
  */
-public interface MutationInterface<T> {
+public interface MutationInterface {
 
-    PopulationItem<T> mutate(PopulationItem<T> item);
+    PopulationItem mutate(PopulationItem item);
 }
