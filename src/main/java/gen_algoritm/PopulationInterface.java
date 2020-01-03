@@ -8,7 +8,7 @@ import java.util.List;
  * @param <T> -Тип гена
  * @param <V> - Тип функции оценки критерия
  */
-public interface PopulationInterface<T, V> {
+public interface PopulationInterface<P, T, V> {
 
-    List<PopulationItemInterface<T, V>> getPipulationItemList();
+    List<PopulationItemInterface<P, T, V>> getPipulationItemList();
 }

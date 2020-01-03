@@ -13,8 +13,15 @@ public class GraphicGen implements GenInterface<Double> {
     }
 
     @Override
-    public List<AlelInterface<Double>> getGen() {
+    public List<AlelInterface<Double>> getGenAsList() {
         return alelList;
+    }
+
+    @Override
+    public Double[] getGenAsArray() {
+        return alelList.stream().map(t -> {
+            return t.getValue();
+        }).toArray(Double[]::new);
     }
 
 }

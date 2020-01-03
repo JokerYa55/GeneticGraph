@@ -1,15 +1,13 @@
 package gen_algoritm;
 
 /**
- * Интерфейс для классов вычислений значения функции
+ * Интерфейс для классов вычислений значения функции в точке
  *
- * @param <P> - Тип аргумента функции
- * @param <T> - Тип входного параметра
- * @param <V> - Тип выходного параметра
+ * @param <T> - Тип входного параметра функции (x)
+ * @param <V> - Тип выходного параметра функции (y)
+ * @param <P> - Тип параметров функции (ген)
  */
-public interface CalcInterface<P, T, V> {
+public interface CalcInterface<T, V, P> {
 
-    V calc(P x, T param);
-
-    V calc(P x, T... param);
+    CalcResultInterface<T, V> calc(T x, P... param);
 }
