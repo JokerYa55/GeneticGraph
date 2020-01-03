@@ -7,6 +7,18 @@ public class GraphicAlel implements AlelInterface<Double> {
     private String name;
     private Double value;
 
+    public GraphicAlel() {
+    }
+
+    public GraphicAlel(String name) {
+        this.name = name;
+    }
+
+    public GraphicAlel(String name, Double value) {
+        this.name = name;
+        this.value = value;
+    }
+
     @Override
     public Double getValue() {
         return value;

@@ -31,4 +31,9 @@ public class FuncItemResult implements CalcResultInterface<Double, Double> {
         this.y = y;
     }
 
+    @Override
+    public String toString() {
+        return "FuncItemResult{" + "x=" + x + ", y=" + y + '}';
+    }
+
 }
