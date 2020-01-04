@@ -4,11 +4,12 @@ import java.util.List;
 
 /**
  *
- * @author admin
  * @param <T> -Тип гена
  * @param <V> - Тип функции оценки критерия
  */
-public interface PopulationInterface<P, T, V> {
+public interface PopulationInterface {
 
-    List<PopulationItemInterface<P, T, V>> getPipulationItemList();
+    List<PopulationItemInterface> getPipulationItemList();
+    int nextStep();
+
 }

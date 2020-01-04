@@ -14,7 +14,7 @@ and open the template in the editor.
 
 <fx:root id="AnchorPane" prefHeight="737.0" prefWidth="1042.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane dividerPositions="0.8797814207650273" layoutX="132.0" layoutY="261.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+      <SplitPane dividerPositions="0.844474761255116" layoutX="132.0" layoutY="261.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
@@ -48,9 +48,10 @@ and open the template in the editor.
                     </items>
                   </SplitPane>
                </children></AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="129.0" prefWidth="1038.0">
                <children>
-                  <Button fx:id="idBtnStart" layoutX="782.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnStartClick" text="Button" />
+                  <Button fx:id="idBtnStart" layoutX="944.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnStartClick" prefHeight="31.0" prefWidth="85.0" text="Old start" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0" />
+                  <Button fx:id="idBtnNextStep" layoutX="944.0" layoutY="55.0" mnemonicParsing="false" onAction="#btnNextStepClick" text="Next Step" AnchorPane.rightAnchor="5.0" />
                </children></AnchorPane>
         </items>
       </SplitPane>

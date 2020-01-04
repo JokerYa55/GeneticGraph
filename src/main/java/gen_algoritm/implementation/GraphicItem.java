@@ -36,6 +36,8 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
 
     @Override
     public Double getCriteriaResult() {
+        baseResultList.forEach((t) -> {
+        });
         return criteriaResult;
     }
 

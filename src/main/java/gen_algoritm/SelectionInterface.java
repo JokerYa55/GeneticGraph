@@ -1,7 +1,7 @@
 package gen_algoritm;
 
 /**
- * Селекция
+ * Селекция (отбор лучших вариантов)
  *
  * @author admin
  */

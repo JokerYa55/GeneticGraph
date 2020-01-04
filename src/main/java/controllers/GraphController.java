@@ -34,6 +34,9 @@ public class GraphController extends AnchorPane {
 
     @FXML
     Button idBtnStart;
+    
+    @FXML
+    Button idBtnNextStep;
 
     public GraphController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/GraphController.fxml"));
@@ -103,6 +106,10 @@ public class GraphController extends AnchorPane {
             idChart.setCreateSymbols(false);
             idChart.getData().add(series2);
         });
-
+    }
+    
+    @FXML
+    public void btnNextStepClick(ActionEvent actionEvent) {
+        LOG.info(String.format("action = %s", actionEvent));
     }
 }
