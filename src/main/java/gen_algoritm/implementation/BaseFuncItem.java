@@ -3,8 +3,11 @@ package gen_algoritm.implementation;
 import gen_algoritm.CalcInterface;
 import gen_algoritm.CalcResultInterface;
 import static java.lang.Math.sin;
+import java.util.logging.Logger;
 
 public class BaseFuncItem implements CalcInterface<Double, Double, Double> {
+
+    private static final Logger LOG = Logger.getLogger(BaseFuncItem.class.getName());
 
     @Override
     public CalcResultInterface<Double, Double> calc(Double x) {

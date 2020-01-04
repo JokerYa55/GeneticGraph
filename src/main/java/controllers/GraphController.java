@@ -1,5 +1,6 @@
 package controllers;
 
+import gen_algoritm.implementation.Population;
 import gen_item.Bot;
 import gen_item.BotBase;
 import gen_item.BotResult;
@@ -111,5 +112,6 @@ public class GraphController extends AnchorPane {
     @FXML
     public void btnNextStepClick(ActionEvent actionEvent) {
         LOG.info(String.format("action = %s", actionEvent));
+        Population population = new Population(10);
     }
 }
