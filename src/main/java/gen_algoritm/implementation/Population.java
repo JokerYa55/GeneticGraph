@@ -25,6 +25,7 @@ public class Population implements PopulationInterface {
         CalcInterface<Double, Double, Double> baseFunc = new BaseFuncItem();
         for (int i = 0; i < populationCount; i++) {
             PopulationItemInterface<Double, GenInterface<Double>, Double> populationItem = new GraphicItem("f_" + i, genFunc, baseFunc);
+            populationItemList.add(populationItem);
         }
     }
 

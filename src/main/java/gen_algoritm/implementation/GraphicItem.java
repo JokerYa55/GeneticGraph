@@ -41,8 +41,19 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
 
     @Override
     public Double getCriteriaResult() {
-        baseResultList.forEach((t) -> {
-        });
+        Double[] base = baseResultList.stream().map((t) -> {
+            return t.getY(); 
+        }).toArray(Double[]::new);
+        
+        Double[] gen = genResultList.stream().map((t) -> {
+            return t.getY(); 
+        }).toArray(Double[]::new);
+        
+        for (int i = 0; i < base.length; i++) {
+            criteriaResult = criteriaResult + Math.pow(base[i]-gen[i], 2);
+        }
+        criteriaResult = Math.sqrt(criteriaResult);
+        LOG.info(String.format("criteriaResult = %s", criteriaResult));
         return criteriaResult;
     }
 
@@ -74,6 +85,7 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
         return genResultList;
     }
 
+    @Override
     public GraphicItem calc(Double... x) {
         for (Double itemX : x) {
             CalcResultInterface<Double, Double> res = new FuncItemResult();

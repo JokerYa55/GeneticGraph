@@ -8,9 +8,9 @@ public class BotBase {
     // Результаты вычисления функции
     private final List<ResultItem> resultList = new ArrayList<>();
     // sin(x)
-    private final double[] x;
+    private final Double[] x;
 
-    public BotBase(double... x) {
+    public BotBase(Double... x) {
         this.x = x;
     }
 

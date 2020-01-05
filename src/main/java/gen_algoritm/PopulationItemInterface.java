@@ -17,4 +17,6 @@ public interface PopulationItemInterface<P, T, V> {
     V getCriteriaResult(); // Получить значение критерия для оценки
 
     PopulationItemInterface<P, T, V> init();
+
+    PopulationItemInterface<P, T, V> calc(P... x);
 }

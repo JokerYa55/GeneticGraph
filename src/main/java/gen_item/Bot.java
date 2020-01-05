@@ -11,10 +11,10 @@ public class Bot {
     private final BotResult result = new BotResult();
     // ax^3 + bx^2 + cx + d
     private double a, b, c, d;
-    private double[] x;
+    private Double[] x;
     private final String name;
 
-    public Bot(double... x) {
+    public Bot(Double... x) {
         this.x = x;
         initDnk();
         count++;
