@@ -1,8 +1,11 @@
 package controllers;
 
 import beans.PopulationInfo;
+import gen_algoritm.CalcInterface;
+import gen_algoritm.CalcResultInterface;
 import gen_algoritm.GenInterface;
 import gen_algoritm.PopulationInterface;
+import gen_algoritm.implementation.BaseFuncItem;
 import gen_algoritm.implementation.Population;
 import gen_item.Bot;
 import gen_item.BotBase;
@@ -30,6 +33,7 @@ public class GraphController extends AnchorPane {
     private static final Logger LOG = Logger.getLogger(GraphController.class.getName());
 
     private static final int COUNT = 50;
+    PopulationInterface population = new Population(10);
     private static final int a = 0;
     private static double b = 10;
     private static final double DELTA_X = (b - a) / COUNT;
@@ -95,51 +99,12 @@ public class GraphController extends AnchorPane {
 
     @FXML
     public void btnStartClick(ActionEvent actionEvent) {
-        LOG.info(String.format("action = %s", actionEvent));
-        // Генерируем массив bot
 
-        List<BotResult> listItem = new LinkedList<>();
-        for (int i = 0; i < 10; i++) {
-            Bot bot = new Bot(x);
-            bot.calc();
-            listItem.add(bot.getResult());
-        }
-
-        showGraph(listItem);
-    }
-
-    public void showGraph(List<BotResult> dataList) {
-        idChart.getData().clear();
-        //Рисуем sin
-        BotBase base = new BotBase(x);
-        base.calc();
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("sin(x)");
-        ObservableList<XYChart.Data> datas = FXCollections.observableArrayList();
-        base.getResultList().forEach((t1) -> {
-            datas.add(new XYChart.Data<String, Double>(t1.getX() + "", t1.getFx()));
-        });
-        series1.setData(datas);
-        idChart.setCreateSymbols(false);
-        idChart.getData().add(series1);
-
-        dataList.forEach((t) -> {
-            XYChart.Series series2 = new XYChart.Series();
-            series2.setName(t.getName());
-            ObservableList<XYChart.Data> datas1 = FXCollections.observableArrayList();
-            t.getResltCalc().forEach((t1) -> {
-                datas1.add(new XYChart.Data<String, Double>(t1.getX() + "", t1.getFx()));
-            });
-            series2.setData(datas1);
-            idChart.setCreateSymbols(false);
-            idChart.getData().add(series2);
-        });
     }
 
     @FXML
     public void btnNextStepClick(ActionEvent actionEvent) {
         LOG.info(String.format("action = %s", actionEvent));
-        PopulationInterface population = new Population(10);
 
         ObservableList<PopulationInfo> populationInfo = FXCollections.observableArrayList();
         population.getPipulationItemList().forEach((t) -> {
@@ -158,5 +123,36 @@ public class GraphController extends AnchorPane {
         fColumn.setCellValueFactory(new PropertyValueFactory<>("f"));
 
         idDataTable.setItems(populationInfo);
+
+        showGraph1();
     }
+
+    public void showGraph1() {
+        idChart.getData().clear();
+        //Рисуем sin
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("sin(x)");
+        ObservableList<XYChart.Data> datas = FXCollections.observableArrayList();
+        List<CalcResultInterface<Double, Double>> baseList = population.getPipulationItemList().get(0).getBaseResultList();
+        baseList.forEach((t1) -> {
+            datas.add(new XYChart.Data<String, Double>(t1.getX() + "", t1.getY()));
+        });
+        series1.setData(datas);
+        idChart.setCreateSymbols(false);
+        idChart.getData().add(series1);
+
+        population.getPipulationItemList().forEach((t) -> {
+            XYChart.Series series2 = new XYChart.Series();
+            series2.setName(t.getName());
+            List<CalcResultInterface<Double, Double>> genList = t.getGenResultList();
+            ObservableList<XYChart.Data> datas1 = FXCollections.observableArrayList();
+            genList.forEach((t1) -> {
+                datas1.add(new XYChart.Data<String, Double>(t1.getX() + "", t1.getY()));
+            });
+            series2.setData(datas1);
+            idChart.setCreateSymbols(false);
+            idChart.getData().add(series2);
+        });
+    }
+
 }
