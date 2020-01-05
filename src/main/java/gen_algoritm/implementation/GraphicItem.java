@@ -41,16 +41,16 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
 
     @Override
     public Double getCriteriaResult() {
-        Double[] base = baseResultList.stream().map((t) -> {
+        Double[] baseRes = baseResultList.stream().map((t) -> {
             return t.getY(); 
         }).toArray(Double[]::new);
         
-        Double[] gen = genResultList.stream().map((t) -> {
+        Double[] genRes = genResultList.stream().map((t) -> {
             return t.getY(); 
         }).toArray(Double[]::new);
         
-        for (int i = 0; i < base.length; i++) {
-            criteriaResult = criteriaResult + Math.pow(base[i]-gen[i], 2);
+        for (int i = 0; i < baseRes.length; i++) {
+            criteriaResult = criteriaResult + Math.pow(baseRes[i]-genRes[i], 2);
         }
         criteriaResult = Math.sqrt(criteriaResult);
         LOG.info(String.format("criteriaResult = %s", criteriaResult));
@@ -85,7 +85,6 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
         return genResultList;
     }
 
-    @Override
     public GraphicItem calc(Double... x) {
         for (Double itemX : x) {
             CalcResultInterface<Double, Double> res = new FuncItemResult();
@@ -94,6 +93,12 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
                 return t; //To change body of generated lambdas, choose Tools | Templates.
             }).toArray(GraphicAlel[]::new)).getY());
             genResultList.add(res);
+            
+            CalcResultInterface<Double, Double> res1 = new FuncItemResult();
+            res1.setX(itemX);
+            res1.setY(baseFunc.calc(itemX).getY());
+            baseResultList.add(res1);
+            
         }
         return this;
     }
