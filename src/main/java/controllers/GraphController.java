@@ -1,17 +1,11 @@
 package controllers;
 
 import beans.PopulationInfo;
-import gen_algoritm.CalcInterface;
 import gen_algoritm.CalcResultInterface;
 import gen_algoritm.GenInterface;
 import gen_algoritm.PopulationInterface;
-import gen_algoritm.implementation.BaseFuncItem;
 import gen_algoritm.implementation.Population;
-import gen_item.Bot;
-import gen_item.BotBase;
-import gen_item.BotResult;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;

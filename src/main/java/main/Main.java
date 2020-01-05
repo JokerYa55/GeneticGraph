@@ -1,7 +1,6 @@
 package main;
 
 import controllers.GraphController;
-import gen_item.Bot;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
