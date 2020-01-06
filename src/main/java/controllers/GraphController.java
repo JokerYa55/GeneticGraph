@@ -4,6 +4,8 @@ import beans.PopulationInfo;
 import gen_algoritm.CalcResultInterface;
 import gen_algoritm.GenInterface;
 import gen_algoritm.PopulationInterface;
+import gen_algoritm.SelectionInterface;
+import gen_algoritm.implementation.GraphSelection;
 import gen_algoritm.implementation.Population;
 import java.io.IOException;
 import java.util.List;
@@ -27,7 +29,7 @@ public class GraphController extends AnchorPane {
     private static final Logger LOG = Logger.getLogger(GraphController.class.getName());
 
     private static final int COUNT = 50;
-    PopulationInterface population = new Population(10);
+    PopulationInterface population;
     private static final int a = 0;
     private static double b = 10;
     private static final double DELTA_X = (b - a) / COUNT;
@@ -79,6 +81,7 @@ public class GraphController extends AnchorPane {
             x[i] = a + i * DELTA_X;
         }
 
+        population = new Population(10, x);
         idChart.setTitle("Series");
 
     }
@@ -96,29 +99,21 @@ public class GraphController extends AnchorPane {
 
     }
 
-    @FXML
-    public void btnNextStepClick(ActionEvent actionEvent) {
-        LOG.info(String.format("action = %s", actionEvent));
-
+    public void shiwTable() {
         ObservableList<PopulationInfo> populationInfo = FXCollections.observableArrayList();
         population.getPipulationItemList().forEach((t) -> {
-            //LOG.info(String.format("t = %s", t));
-            t.calc(x);
             Double[] gen = ((GenInterface) t.getGen()).getGenAsArray();
             populationInfo.add(new PopulationInfo(1, gen[0], gen[1], gen[2], gen[3], (Double) t.getCriteriaResult()));
         });
+        
 
-        //populationInfo.add(new PopulationInfo(1, 1d, 1d, 1d, 1d, 4d));
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         aColumn.setCellValueFactory(new PropertyValueFactory<>("a"));
         bColumn.setCellValueFactory(new PropertyValueFactory<>("b"));
         cColumn.setCellValueFactory(new PropertyValueFactory<>("c"));
         dColumn.setCellValueFactory(new PropertyValueFactory<>("d"));
         fColumn.setCellValueFactory(new PropertyValueFactory<>("f"));
-
         idDataTable.setItems(populationInfo);
-
-        showGraph1();
     }
 
     public void showGraph1() {
@@ -149,4 +144,13 @@ public class GraphController extends AnchorPane {
         });
     }
 
+    
+    
+    @FXML
+    public void btnNextStepClick(ActionEvent actionEvent) {
+        LOG.info(String.format("action = %s", actionEvent));
+        population.nextStep();
+        shiwTable();
+        showGraph1();
+    }
 }
