@@ -25,9 +25,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 public class GraphController extends AnchorPane {
-
+    
     private static final Logger LOG = Logger.getLogger(GraphController.class.getName());
-
+    
     private static final int COUNT = 50;
     PopulationInterface population;
     private static final int a = 0;
@@ -35,78 +35,85 @@ public class GraphController extends AnchorPane {
     private static final double DELTA_X = (b - a) / COUNT;
     private Parent root;
     Double[] x = new Double[COUNT];
-
+    
     @FXML
     LineChart<String, Double> idChart;
-
+    
     @FXML
     Button idBtnStart;
-
+    
     @FXML
     Button idBtnNextStep;
-
+    
     @FXML
     TableView<PopulationInfo> idDataTable;
-
+    
     @FXML
     private TableColumn<PopulationInfo, Integer> idColumn;
-
+    
     @FXML
     private TableColumn<PopulationInfo, Double> aColumn;
-
+    
     @FXML
     private TableColumn<PopulationInfo, Double> bColumn;
-
+    
     @FXML
     private TableColumn<PopulationInfo, Double> cColumn;
-
+    
     @FXML
     private TableColumn<PopulationInfo, Double> dColumn;
-
+    
     @FXML
     private TableColumn<PopulationInfo, Double> fColumn;
-
+    
     public GraphController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/GraphController.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
+        
         try {
             root = fxmlLoader.load();
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
+        
         for (int i = 0; i < COUNT; i++) {
             x[i] = a + i * DELTA_X;
         }
-
+        
         population = new Population(10, x);
         idChart.setTitle("Series");
-
+        
     }
-
+    
     public Parent getRoot() {
         return root;
     }
-
+    
     @FXML
     private void initialize() {
     }
-
+    
     @FXML
     public void btnStartClick(ActionEvent actionEvent) {
-
+        
     }
-
+    
     public void shiwTable() {
         ObservableList<PopulationInfo> populationInfo = FXCollections.observableArrayList();
+        population.getPipulationItemList().forEach((t) -> {
+            System.out.println(String.format("criteria 2 = %s", t.getCriteriaResult()));            
+        });
+        
         population.getPipulationItemList().forEach((t) -> {
             Double[] gen = ((GenInterface) t.getGen()).getGenAsArray();
             populationInfo.add(new PopulationInfo(1, gen[0], gen[1], gen[2], gen[3], (Double) t.getCriteriaResult()));
         });
         
-
+        populationInfo.forEach((t) -> {
+            System.out.println(String.format("t = %s", t));
+        });
+        
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         aColumn.setCellValueFactory(new PropertyValueFactory<>("a"));
         bColumn.setCellValueFactory(new PropertyValueFactory<>("b"));
@@ -115,7 +122,7 @@ public class GraphController extends AnchorPane {
         fColumn.setCellValueFactory(new PropertyValueFactory<>("f"));
         idDataTable.setItems(populationInfo);
     }
-
+    
     public void showGraph1() {
         idChart.getData().clear();
         //Рисуем sin
@@ -129,7 +136,7 @@ public class GraphController extends AnchorPane {
         series1.setData(datas);
         idChart.setCreateSymbols(false);
         idChart.getData().add(series1);
-
+        
         population.getPipulationItemList().forEach((t) -> {
             XYChart.Series series2 = new XYChart.Series();
             series2.setName(t.getName());
@@ -143,8 +150,6 @@ public class GraphController extends AnchorPane {
             idChart.getData().add(series2);
         });
     }
-
-    
     
     @FXML
     public void btnNextStepClick(ActionEvent actionEvent) {

@@ -1,10 +1,10 @@
 package gen_algoritm.implementation;
 
-import beans.PopulationInfo;
 import gen_algoritm.AlelInterface;
 import gen_algoritm.CalcInterface;
 import gen_algoritm.DublicateInterface;
 import gen_algoritm.GenInterface;
+import gen_algoritm.MutationInterface;
 import gen_algoritm.PopulationInterface;
 import gen_algoritm.PopulationItemInterface;
 import gen_algoritm.SelectionInterface;
@@ -23,6 +23,7 @@ public class Population implements PopulationInterface {
     private int stepNum = 0;
     private SelectionInterface selctionGraph = new GraphSelection();
     private DublicateInterface dublicateGraph = new GraphDublication();
+    private MutationInterface mutatationGraph = new GraphMutation();
     private final Double[] x;
     private int populationItemCount;
 
@@ -69,9 +70,11 @@ public class Population implements PopulationInterface {
         selctionGraph.selection(this);
         // Размножение
         dublicateGraph.dublicate(this);
-        calc();
+        //calc();
         // Скрещивание
         // Мутация
+        //mutatationGraph.mutate(this);
+        calc();
         return stepNum;
     }
 

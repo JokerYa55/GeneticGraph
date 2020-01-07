@@ -58,4 +58,9 @@ public class PopulationInfo {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "PopulationInfo{" + "id=" + id + ", a=" + a + ", b=" + b + ", c=" + c + ", d=" + d + ", f=" + f + '}';
+    }
+
 }

@@ -34,4 +34,9 @@ public class GraphicAlel implements AlelInterface<Double> {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return "GraphicAlel{" + "name=" + name + ", value=" + value + '}';
+    }
+
 }

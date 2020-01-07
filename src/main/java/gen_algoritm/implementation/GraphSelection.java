@@ -17,7 +17,7 @@ public class GraphSelection implements SelectionInterface {
 
     @Override
     public PopulationInterface selection(PopulationInterface population) {
-        LOG.info("selection");
+        LOG.info("-------------- selection ----------------");
         population.getPipulationItemList().sort((PopulationItemInterface o1, PopulationItemInterface o2) -> {
             if (((Double) o1.getCriteriaResult()) >= ((Double) o2.getCriteriaResult())) {
                 return 1;
@@ -25,11 +25,21 @@ public class GraphSelection implements SelectionInterface {
                 return -1;
             }
         });
-        List temp = population.getPipulationItemList().stream().limit(2).
+        
+        population.getPipulationItemList().forEach((t) -> {
+            System.out.println(String.format("criteria = %s", t.getCriteriaResult()));
+        });
+        
+        List<PopulationItemInterface> temp = population.getPipulationItemList().stream().limit(2).
                 collect(Collectors.toList());
+        temp.forEach((t) -> {
+            System.out.println(String.format("criteria temp = %s", t.getCriteriaResult()));
+        });
         population.getPipulationItemList().clear();
         population.getPipulationItemList().addAll(temp);
-        LOG.info(String.format("itemList = %s", population.getPipulationItemList()));
+        population.getPipulationItemList().forEach((t) -> {
+            System.out.println(String.format("criteria 3 = %s", t.getCriteriaResult()));
+        });
         return population;
     }
 

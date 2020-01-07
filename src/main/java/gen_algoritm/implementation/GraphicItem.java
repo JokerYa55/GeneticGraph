@@ -119,4 +119,11 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
         this.gen = gen;
     }
 
+    @Override
+    public String toString() {
+        return "GraphicItem{" + "gen=" + gen + ", name=" + name + ", genFunc=" + genFunc + ", baseFunc=" + baseFunc + ", criteriaResult=" + criteriaResult + ", baseResultList=" + baseResultList + ", genResultList=" + genResultList + '}';
+    }
+
+    
+    
 }
