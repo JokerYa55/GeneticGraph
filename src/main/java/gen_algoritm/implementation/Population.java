@@ -63,7 +63,7 @@ public class Population implements PopulationInterface {
     @Override
     public int nextStep() {
         stepNum++;
-        LOG.info(String.format("step num = %s", stepNum));
+        LOG.info(String.format("************** step num = %s *****************", stepNum));
         calc();
         // Отбор
         selctionGraph.selection(this);

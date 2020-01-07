@@ -27,7 +27,7 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
     private final List<CalcResultInterface<Double, Double>> genResultList = new ArrayList<>();
 
     public GraphicItem(String name, CalcInterface<Double, Double, AlelInterface<Double>> genFunc, CalcInterface<Double, Double, Double> baseFunc) {
-        LOG.info(String.format("GraphicItem = %s", name));
+        //LOG.info(String.format("GraphicItem = %s", name));
         this.name = name;
         this.genFunc = genFunc;
         this.baseFunc = baseFunc;
@@ -41,19 +41,7 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
 
     @Override
     public Double getCriteriaResult() {
-        Double[] baseRes = baseResultList.stream().map((t) -> {
-            return t.getY();
-        }).toArray(Double[]::new);
-
-        Double[] genRes = genResultList.stream().map((t) -> {
-            return t.getY();
-        }).toArray(Double[]::new);
-
-        for (int i = 0; i < baseRes.length; i++) {
-            criteriaResult = criteriaResult + Math.pow(baseRes[i] - genRes[i], 2);
-        }
-        criteriaResult = Math.sqrt(criteriaResult);
-        LOG.info(String.format("criteriaResult = %s", criteriaResult));
+        //LOG.info(String.format("criteriaResult = %s", criteriaResult));
         return criteriaResult;
     }
 
@@ -64,7 +52,7 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
 
     @Override
     public PopulationItemInterface<Double, GenInterface<Double>, Double> init() {
-        LOG.info("init");
+        //LOG.info("init");
         Random random = new Random();
         this.gen.getGenAsList().clear();
         for (int i = 0; i < 4; i++) {
@@ -100,6 +88,19 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
             baseResultList.add(res1);
 
         }
+        // Считаем функцию критерию
+        Double[] baseRes = baseResultList.stream().map((t) -> {
+            return t.getY();
+        }).toArray(Double[]::new);
+
+        Double[] genRes = genResultList.stream().map((t) -> {
+            return t.getY();
+        }).toArray(Double[]::new);
+
+        for (int i = 0; i < baseRes.length; i++) {
+            criteriaResult = criteriaResult + Math.pow(baseRes[i] - genRes[i], 2);
+        }
+        criteriaResult = Math.sqrt(criteriaResult);
         return this;
     }
 
