@@ -22,8 +22,10 @@ public class Population implements PopulationInterface {
     private int stepNum = 0;
     private SelectionInterface selctionGraph = new GraphSelection();
     private final Double[] x;
+    private int populationItemCount;
 
     public Population(int populationCount, Double... x) {
+        this.populationItemCount = populationCount;
         this.x = x;
         populationItemList = new ArrayList<>(populationCount);
         CalcInterface<Double, Double, AlelInterface<Double>> genFunc = new FuncItem();
@@ -42,10 +44,12 @@ public class Population implements PopulationInterface {
     @Override
     public int nextStep() {
         stepNum++;
+        LOG.info(String.format("step num = %s", stepNum));
         calc();
         // Отбор
         selctionGraph.selection(this);
         // Размножение
+        // Скрещивание
         // Мутация
         return stepNum;
     }
@@ -54,6 +58,11 @@ public class Population implements PopulationInterface {
         populationItemList.forEach((t) -> {
             t.calc(x);
         });
+    }
+
+    @Override
+    public int getPopulationItemCount() {
+        return populationItemCount;
     }
 
 }

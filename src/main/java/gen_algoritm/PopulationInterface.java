@@ -13,4 +13,5 @@ public interface PopulationInterface {
 
     int nextStep();
 
+    int getPopulationItemCount();
 }
