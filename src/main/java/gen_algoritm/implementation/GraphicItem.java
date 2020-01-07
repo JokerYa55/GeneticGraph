@@ -14,7 +14,7 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
 
     private static final Logger LOG = Logger.getLogger(GraphicItem.class.getName());
 
-    private GenInterface<Double> gen = new GraphicGen();
+    private GenInterface<Double> gen = new GraphicGen(4);
     private final String name;
     // Функция для генов
     private final CalcInterface<Double, Double, AlelInterface<Double>> genFunc;
@@ -103,10 +103,6 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
         return this;
     }
 
-    public void setGen(GenInterface<Double> gen) {
-        this.gen = gen;
-    }
-
     @Override
     public List<CalcResultInterface<Double, Double>> getBaseResultList() {
         return baseResultList;
@@ -115,6 +111,11 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
     @Override
     public List<CalcResultInterface<Double, Double>> getGenResultList() {
         return genResultList;
+    }
+
+    @Override
+    public void setGen(GenInterface<Double> gen) {
+        this.gen = gen;
     }
 
 }

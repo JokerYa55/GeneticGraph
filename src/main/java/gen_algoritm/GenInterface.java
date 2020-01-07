@@ -10,5 +10,10 @@ import java.util.List;
 public interface GenInterface<T> {
 
     List<AlelInterface<T>> getGenAsList();
+
     Double[] getGenAsArray();
+
+    void setGenAlel(int i, AlelInterface<T> alel);
+
+    AlelInterface<T> getGenAlel(int i);
 }

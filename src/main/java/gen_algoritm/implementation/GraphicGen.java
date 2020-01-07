@@ -7,9 +7,13 @@ import java.util.List;
 
 public class GraphicGen implements GenInterface<Double> {
 
-    private final List<AlelInterface<Double>> alelList = new ArrayList<>(4);
+    private final List<AlelInterface<Double>> alelList;
 
-    public GraphicGen() {
+    public GraphicGen(int genAlelCount) {
+        alelList = new ArrayList<>(genAlelCount);
+        for (int i = 0; i < genAlelCount; i++) {
+            alelList.add(new GraphicAlel("i_" + i, 0d));
+        }
     }
 
     @Override
@@ -22,6 +26,16 @@ public class GraphicGen implements GenInterface<Double> {
         return alelList.stream().map(t -> {
             return t.getValue();
         }).toArray(Double[]::new);
+    }
+
+    @Override
+    public void setGenAlel(int i, AlelInterface<Double> alel) {
+        alelList.set(i, alel);
+    }
+
+    @Override
+    public AlelInterface<Double> getGenAlel(int i) {
+        return alelList.get(i);
     }
 
 }

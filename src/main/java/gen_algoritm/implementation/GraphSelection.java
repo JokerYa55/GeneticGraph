@@ -15,10 +15,10 @@ public class GraphSelection implements SelectionInterface {
     @Override
     public PopulationInterface selection(PopulationInterface population) {
         population.getPipulationItemList().sort((PopulationItemInterface o1, PopulationItemInterface o2) -> {
-            if (((Double) o1.getCriteriaResult()) > ((Double) o2.getCriteriaResult())) {
+            if (((Double) o1.getCriteriaResult()) >= ((Double) o2.getCriteriaResult())) {
                 return 1;
             } else {
-                return 0;
+                return -1;
             }
         });
         List temp = population.getPipulationItemList().stream().limit(2).

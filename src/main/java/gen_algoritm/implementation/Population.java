@@ -3,6 +3,7 @@ package gen_algoritm.implementation;
 import beans.PopulationInfo;
 import gen_algoritm.AlelInterface;
 import gen_algoritm.CalcInterface;
+import gen_algoritm.DublicateInterface;
 import gen_algoritm.GenInterface;
 import gen_algoritm.PopulationInterface;
 import gen_algoritm.PopulationItemInterface;
@@ -21,6 +22,7 @@ public class Population implements PopulationInterface {
     private final List<PopulationItemInterface> populationItemList;
     private int stepNum = 0;
     private SelectionInterface selctionGraph = new GraphSelection();
+    private DublicateInterface dublicateGraph = new GraphDublication();
     private final Double[] x;
     private int populationItemCount;
 
@@ -41,19 +43,6 @@ public class Population implements PopulationInterface {
         return populationItemList;
     }
 
-    @Override
-    public int nextStep() {
-        stepNum++;
-        LOG.info(String.format("step num = %s", stepNum));
-        calc();
-        // Отбор
-        selctionGraph.selection(this);
-        // Размножение
-        // Скрещивание
-        // Мутация
-        return stepNum;
-    }
-
     private void calc() {
         populationItemList.forEach((t) -> {
             t.calc(x);
@@ -63,6 +52,27 @@ public class Population implements PopulationInterface {
     @Override
     public int getPopulationItemCount() {
         return populationItemCount;
+    }
+
+    @Override
+    public PopulationItemInterface addPopulationItem(PopulationItemInterface item) {
+        populationItemList.add(item);
+        return item;
+    }
+
+    @Override
+    public int nextStep() {
+        stepNum++;
+        LOG.info(String.format("step num = %s", stepNum));
+        calc();
+        // Отбор
+        selctionGraph.selection(this);
+        // Размножение
+        dublicateGraph.dublicate(this);
+        calc();
+        // Скрещивание
+        // Мутация
+        return stepNum;
     }
 
 }

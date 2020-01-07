@@ -25,4 +25,6 @@ public interface PopulationItemInterface<P, T, V> {
     List<CalcResultInterface<P, P>> getBaseResultList();
 
     List<CalcResultInterface<P, P>> getGenResultList();
+    
+    void setGen(T gen);
 }
