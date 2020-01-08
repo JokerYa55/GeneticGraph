@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
-public class GraphicItem implements PopulationItemInterface<Double, GenInterface<Double>, Double> {
+public final class GraphicItem implements PopulationItemInterface<Double, GenInterface<Double>, Double> {
 
     private static final Logger LOG = Logger.getLogger(GraphicItem.class.getName());
 
@@ -25,13 +25,16 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
     private final List<CalcResultInterface<Double, Double>> baseResultList = new ArrayList<>();
     // Результаты вычисления гена на интервале.
     private final List<CalcResultInterface<Double, Double>> genResultList = new ArrayList<>();
+    private final Double[] x;
 
-    public GraphicItem(String name, CalcInterface<Double, Double, AlelInterface<Double>> genFunc, CalcInterface<Double, Double, Double> baseFunc) {
+    public GraphicItem(String name, CalcInterface<Double, Double, AlelInterface<Double>> genFunc, CalcInterface<Double, Double, Double> baseFunc, Double[] x) {
         //LOG.info(String.format("GraphicItem = %s", name));
         this.name = name;
         this.genFunc = genFunc;
         this.baseFunc = baseFunc;
+        this.x = x;
         init();
+        calc(x);
     }
 
     @Override
@@ -52,7 +55,7 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
 
     @Override
     public PopulationItemInterface<Double, GenInterface<Double>, Double> init() {
-        //LOG.info("init");
+        //System.out.println("init");
         Random random = new Random();
         this.gen.getGenAsList().clear();
         for (int i = 0; i < 4; i++) {
@@ -73,12 +76,15 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
         return genResultList;
     }
 
+    @Override
     public GraphicItem calc(Double... x) {
+        //System.out.println("calc");
+        genResultList.clear();
         for (Double itemX : x) {
             CalcResultInterface<Double, Double> res = new FuncItemResult();
             res.setX(itemX);
             res.setY(genFunc.calc(itemX, gen.getGenAsList().stream().map((t) -> {
-                return t; //To change body of generated lambdas, choose Tools | Templates.
+                return t; 
             }).toArray(GraphicAlel[]::new)).getY());
             genResultList.add(res);
 
@@ -97,6 +103,7 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
             return t.getY();
         }).toArray(Double[]::new);
 
+        criteriaResult = 0d;
         for (int i = 0; i < baseRes.length; i++) {
             criteriaResult = criteriaResult + Math.pow(baseRes[i] - genRes[i], 2);
         }
@@ -124,6 +131,4 @@ public class GraphicItem implements PopulationItemInterface<Double, GenInterface
         return "GraphicItem{" + "gen=" + gen + ", name=" + name + ", genFunc=" + genFunc + ", baseFunc=" + baseFunc + ", criteriaResult=" + criteriaResult + ", baseResultList=" + baseResultList + ", genResultList=" + genResultList + '}';
     }
 
-    
-    
 }

@@ -8,6 +8,7 @@ import gen_algoritm.PopulationInterface;
 import gen_algoritm.PopulationItemInterface;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,8 +16,16 @@ import java.util.List;
  */
 public class GraphDublication implements DublicateInterface {
 
+    private static final Logger LOG = Logger.getLogger(GraphDublication.class.getName());
+    private final Double[] x;
+
+    public GraphDublication(Double... x) {
+        this.x = x;
+    }
+
     @Override
     public PopulationInterface dublicate(PopulationInterface population) {
+        LOG.info("-------------- dublicate --------------");
         // Получаем среднии значения генов;
         List<PopulationItemInterface> itemList = population.getPipulationItemList();
         int parentCount = population.getPipulationItemList().size();
@@ -37,16 +46,22 @@ public class GraphDublication implements DublicateInterface {
         genNew.getGenAsList().forEach((t) -> {
             t.setValue(t.getValue() / parentCount);
         });
+
         // Порождаем новые элементы популяции с новым геном
         CalcInterface<Double, Double, AlelInterface<Double>> genFunc = new FuncItem();
         CalcInterface<Double, Double, Double> baseFunc = new BaseFuncItem();
         for (int i = population.getPipulationItemList().size(); i < population.getPopulationItemCount(); i++) {
-            PopulationItemInterface item = population.addPopulationItem(new GraphicItem("f_" + i,
+            PopulationItemInterface item = population.addPopulationItem(new GraphicItem("f_" + population.getStepNum() + "_" + i,
                     genFunc,
-                    baseFunc));
+                    baseFunc, x));
             item.setGen(genNew);
-            
+            //item.calc(x);
         }
+        population.getPipulationItemList().forEach((t) -> {
+            System.out.println(String.format("criteria 4 = %s name = %s", t.getCriteriaResult(), t.getName()));
+        });
+
+        LOG.info("-------------- dublicate end ----------");
         return population;
     }
 

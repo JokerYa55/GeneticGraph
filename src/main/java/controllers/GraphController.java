@@ -4,6 +4,7 @@ import beans.PopulationInfo;
 import gen_algoritm.CalcResultInterface;
 import gen_algoritm.GenInterface;
 import gen_algoritm.PopulationInterface;
+import gen_algoritm.PopulationItemInterface;
 import gen_algoritm.SelectionInterface;
 import gen_algoritm.implementation.GraphSelection;
 import gen_algoritm.implementation.Population;
@@ -100,14 +101,16 @@ public class GraphController extends AnchorPane {
     }
     
     public void shiwTable() {
+        System.out.println("----------- shiwTable -----------");
         ObservableList<PopulationInfo> populationInfo = FXCollections.observableArrayList();
-        population.getPipulationItemList().forEach((t) -> {
-            System.out.println(String.format("criteria 2 = %s", t.getCriteriaResult()));            
-        });
+//        population.getPipulationItemList().forEach((t) -> {
+//            System.out.println(String.format("criteria 2 = %s", t.getCriteriaResult()));            
+//        });
         
-        population.getPipulationItemList().forEach((t) -> {
+        population.getPipulationItemList().forEach((PopulationItemInterface t) -> {
+            System.out.println(String.format("criteria 5 = %s name = %s", t.getCriteriaResult(), t.getName()));
             Double[] gen = ((GenInterface) t.getGen()).getGenAsArray();
-            populationInfo.add(new PopulationInfo(1, gen[0], gen[1], gen[2], gen[3], (Double) t.getCriteriaResult()));
+            populationInfo.add(new PopulationInfo(1, gen[0], gen[1], gen[2], gen[3], (Double)t.getCriteriaResult()));
         });
         
         populationInfo.forEach((t) -> {
@@ -121,6 +124,7 @@ public class GraphController extends AnchorPane {
         dColumn.setCellValueFactory(new PropertyValueFactory<>("d"));
         fColumn.setCellValueFactory(new PropertyValueFactory<>("f"));
         idDataTable.setItems(populationInfo);
+        LOG.info("----------- shiwTable end --------");
     }
     
     public void showGraph1() {

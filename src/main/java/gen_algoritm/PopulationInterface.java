@@ -16,4 +16,6 @@ public interface PopulationInterface {
     int getPopulationItemCount();
     
     PopulationItemInterface addPopulationItem(PopulationItemInterface item);
+    
+    int getStepNum();
 }

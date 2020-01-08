@@ -21,20 +21,23 @@ public class Population implements PopulationInterface {
     private static final Logger LOG = Logger.getLogger(Population.class.getName());
     private final List<PopulationItemInterface> populationItemList;
     private int stepNum = 0;
-    private SelectionInterface selctionGraph = new GraphSelection();
-    private DublicateInterface dublicateGraph = new GraphDublication();
-    private MutationInterface mutatationGraph = new GraphMutation();
     private final Double[] x;
+    private SelectionInterface selctionGraph = new GraphSelection();
+    private DublicateInterface dublicateGraph;
+    private MutationInterface mutatationGraph = new GraphMutation();
+
     private int populationItemCount;
 
     public Population(int populationCount, Double... x) {
+        LOG.info("Population constructor");
         this.populationItemCount = populationCount;
         this.x = x;
+        this.dublicateGraph = new GraphDublication(x);
         populationItemList = new ArrayList<>(populationCount);
         CalcInterface<Double, Double, AlelInterface<Double>> genFunc = new FuncItem();
         CalcInterface<Double, Double, Double> baseFunc = new BaseFuncItem();
         for (int i = 0; i < populationCount; i++) {
-            PopulationItemInterface<Double, GenInterface<Double>, Double> populationItem = new GraphicItem("f_" + i, genFunc, baseFunc);
+            PopulationItemInterface<Double, GenInterface<Double>, Double> populationItem = new GraphicItem("f_" + i, genFunc, baseFunc, x);
             populationItemList.add(populationItem);
         }
     }
@@ -44,12 +47,11 @@ public class Population implements PopulationInterface {
         return populationItemList;
     }
 
-    private void calc() {
-        populationItemList.forEach((t) -> {
-            t.calc(x);
-        });
-    }
-
+//    private void calc() {
+//        populationItemList.forEach((t) -> {
+//            t.calc(x);
+//        });
+//    }
     @Override
     public int getPopulationItemCount() {
         return populationItemCount;
@@ -64,8 +66,10 @@ public class Population implements PopulationInterface {
     @Override
     public int nextStep() {
         stepNum++;
-        LOG.info(String.format("************** step num = %s *****************", stepNum));
-        calc();
+        System.out.println("**********************************************");
+        System.out.println(String.format("************** step num = %s *****************", stepNum));
+        System.out.println("**********************************************");
+
         // Отбор
         selctionGraph.selection(this);
         // Размножение
@@ -74,7 +78,13 @@ public class Population implements PopulationInterface {
         // Скрещивание
         // Мутация
         //mutatationGraph.mutate(this);
-        calc();
+        //calc();
+        System.out.println(String.format("************** END step num = %s **************\n\n\n", stepNum));
+        return stepNum;
+    }
+
+    @Override
+    public int getStepNum() {
         return stepNum;
     }
 
