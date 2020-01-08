@@ -16,8 +16,12 @@ public class FuncItem implements CalcInterface<Double, Double, AlelInterface<Dou
         double res = 0;
         int i = 0;
         for (AlelInterface<Double> a : param) {
-            res = res + a.getValue() * Math.pow(x, i);
-            //System.out.println("a = " + a.getValue() + " x = " + x + " res = " + res + " Math.pow(x, i) = " + Math.pow(x, i));
+            if (i == 1) {
+                res = res + Math.cos(a.getValue()) * Math.pow(x, i);
+            } else {
+                res = res + a.getValue() * Math.pow(x, i);
+            }
+
             i++;
         }
         result.setX(x);

@@ -24,7 +24,7 @@ public class Population implements PopulationInterface {
     private final Double[] x;
     private SelectionInterface selctionGraph = new GraphSelection();
     private DublicateInterface dublicateGraph;
-    private MutationInterface mutatationGraph = new GraphMutation();
+    private MutationInterface mutatationGraph;
 
     private int populationItemCount;
 
@@ -33,6 +33,7 @@ public class Population implements PopulationInterface {
         this.populationItemCount = populationCount;
         this.x = x;
         this.dublicateGraph = new GraphDublication(x);
+        this.mutatationGraph = new GraphMutation(x);
         populationItemList = new ArrayList<>(populationCount);
         CalcInterface<Double, Double, AlelInterface<Double>> genFunc = new FuncItem();
         CalcInterface<Double, Double, Double> baseFunc = new BaseFuncItem();
@@ -77,7 +78,7 @@ public class Population implements PopulationInterface {
         //calc();
         // Скрещивание
         // Мутация
-        //mutatationGraph.mutate(this);
+        mutatationGraph.mutate(this);
         //calc();
         System.out.println(String.format("************** END step num = %s **************\n\n\n", stepNum));
         return stepNum;

@@ -15,27 +15,44 @@ import java.util.logging.Logger;
 public class GraphMutation implements MutationInterface {
 
     private static final Logger LOG = Logger.getLogger(GraphMutation.class.getName());
+    private final Double[] x;
+
+    public GraphMutation(Double... x) {
+        this.x = x;
+    }
 
     @Override
     public PopulationInterface mutate(PopulationInterface population) {
-        LOG.info("mutate");
+        LOG.info("--------------- mutate ---------------");
         Random random = new Random();
-        population.getPipulationItemList().forEach((t) -> {
-            System.out.println(String.format("t = %s", t));
+        population.getPipulationItemList().stream().skip(2).forEach((t) -> {
             GenInterface<Double> gen = (GenInterface<Double>) t.getGen();
-            gen.getGenAsList().forEach((t1) -> {
-                System.out.println(String.format("t1 = %s", t1));
+            //System.out.println(String.format("gen = %s", gen));
+            for (int i = 0; i < gen.getGenAsList().size(); i++) {
                 Double rand = 0d;
                 if (random.nextBoolean()) {
                     rand = random.nextDouble();
                 } else {
                     rand = -random.nextDouble();
                 }
-                System.out.println(String.format("rand = %s", rand));
-                t1.setValue(t1.getValue() + rand);
-                System.out.println(String.format("t1 = %s\n", t1));
-            });
+                //System.out.println("rand = " + rand / 100);
+                AlelInterface<Double> alelNew = new GraphicAlel(i + "", gen.getGenAlel(i).getValue() + rand / 100);
+                gen.setGenAlel(i, alelNew);
+            }
+            t.setGen(gen);
+            //System.out.println(String.format("gen = %s", t.getGen()));
         });
+
+        population.getPipulationItemList().forEach((PopulationItemInterface t) -> {
+            //System.out.println(String.format("t = %s", t.getGen()));
+            t.calc(x);
+        });
+
+//        population.getPipulationItemList().forEach((t) -> {
+//            System.out.println(String.format("criteria 6 = %s name = %s", t.getCriteriaResult(), t.getName()));
+//        });
+
+        LOG.info("--------------- mutate end ------------");
         return population;
     }
 

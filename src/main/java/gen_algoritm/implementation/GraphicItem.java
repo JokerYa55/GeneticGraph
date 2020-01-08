@@ -42,7 +42,9 @@ public final class GraphicItem implements PopulationItemInterface<Double, GenInt
         this.baseFunc = baseFunc;
         this.genFunc = genFunc;
         this.x = x;
-        this.gen = gen;
+        GenInterface<Double> genNew = new GraphicGen(4);
+        
+        this.gen = new GraphicGen(gen);
         calc(x);
     }
 
@@ -101,6 +103,7 @@ public final class GraphicItem implements PopulationItemInterface<Double, GenInt
     public GraphicItem calc(Double... x) {
         //System.out.println("calc");
         genResultList.clear();
+        baseResultList.clear();
         for (Double itemX : x) {
             CalcResultInterface<Double, Double> res = new FuncItemResult();
             res.setX(itemX);

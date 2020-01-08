@@ -9,6 +9,13 @@ public class GraphicGen implements GenInterface<Double> {
 
     private final List<AlelInterface<Double>> alelList;
 
+    public GraphicGen(GenInterface<Double> item) {
+        alelList = new ArrayList<>(item.getGenAsList().size());
+        this.getGenAsList().addAll(item.getGenAsList());
+    }
+
+    
+    
     public GraphicGen(int genAlelCount) {
         alelList = new ArrayList<>(genAlelCount);
         for (int i = 0; i < genAlelCount; i++) {
@@ -38,4 +45,11 @@ public class GraphicGen implements GenInterface<Double> {
         return alelList.get(i);
     }
 
+    @Override
+    public String toString() {
+        return "GraphicGen{" + "alelList=" + alelList + '}';
+    }
+
+    
+    
 }
