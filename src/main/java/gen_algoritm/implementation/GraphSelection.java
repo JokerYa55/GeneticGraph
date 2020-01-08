@@ -20,9 +20,9 @@ public class GraphSelection implements SelectionInterface {
     public PopulationInterface selection(PopulationInterface population) {
         LOG.info("-------------- selection ----------------");
         System.out.println("in");
-        population.getPipulationItemList().forEach((t) -> {
-            System.out.println(String.format("criteria base = %s name = %s", t.getCriteriaResult(), t.getName()));
-        });
+//        population.getPipulationItemList().forEach((t) -> {
+//            System.out.println(String.format("criteria base = %s name = %s", t.getCriteriaResult(), t.getName()));
+//        });
         System.out.println("in end");
         population.getPipulationItemList().sort((PopulationItemInterface o1, PopulationItemInterface o2) -> {
             if (((Double) o1.getCriteriaResult()) >= ((Double) o2.getCriteriaResult())) {
@@ -38,14 +38,16 @@ public class GraphSelection implements SelectionInterface {
         
         List<PopulationItemInterface> temp = population.getPipulationItemList().stream().limit(2).
                 collect(Collectors.toList());
-        temp.forEach((t) -> {
-            System.out.println(String.format("criteria 1 temp = %s name = %s", t.getCriteriaResult(), t.getName()));
-        });
+        
+//        temp.forEach((t) -> {
+//            System.out.println(String.format("criteria 1 temp = %s name = %s", t.getCriteriaResult(), t.getName()));
+//        });
+
         population.getPipulationItemList().clear();
         population.getPipulationItemList().addAll(temp);
-        population.getPipulationItemList().forEach((t) -> {
-            System.out.println(String.format("criteria 2 = %s name = %s", t.getCriteriaResult(), t.getName()));
-        });
+//        population.getPipulationItemList().forEach((t) -> {
+//            System.out.println(String.format("criteria 2 = %s name = %s", t.getCriteriaResult(), t.getName()));
+//        });
         LOG.info("-------------- selection end ------------");
         return population;
     }

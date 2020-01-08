@@ -56,9 +56,9 @@ public class GraphDublication implements DublicateInterface {
                     genFunc,
                     baseFunc, x, genNew));
         }
-        population.getPipulationItemList().forEach((t) -> {
-            System.out.println(String.format("criteria 4 = %s name = %s", t.getCriteriaResult(), t.getName()));
-        });
+//        population.getPipulationItemList().forEach((t) -> {
+//            System.out.println(String.format("criteria 4 = %s name = %s", t.getCriteriaResult(), t.getName()));
+//        });
 
         LOG.info("-------------- dublicate end ----------");
         return population;
