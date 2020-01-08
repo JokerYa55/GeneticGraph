@@ -18,7 +18,7 @@ and open the template in the editor.
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <SplitPane dividerPositions="0.6521739130434783" prefHeight="505.0" prefWidth="683.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+                  <SplitPane dividerPositions="0.4954710144927536" prefHeight="505.0" prefWidth="683.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="611.0" prefWidth="616.0">
                            <children>
@@ -32,7 +32,7 @@ and open the template in the editor.
                               </LineChart>
                            </children>
                         </AnchorPane>
-                      <AnchorPane maxWidth="380.0" minHeight="0.0" minWidth="450.0" prefHeight="636.0" prefWidth="235.0">
+                      <AnchorPane maxWidth="700.0" minHeight="0.0" minWidth="450.0" prefHeight="636.0" prefWidth="235.0">
                            <children>
                               <TableView fx:id="idDataTable" layoutX="27.0" layoutY="37.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                                 <columns>
@@ -41,7 +41,8 @@ and open the template in the editor.
                                     <TableColumn fx:id="bColumn" prefWidth="75.0" text="b" />
                                     <TableColumn fx:id="cColumn" prefWidth="75.0" text="c" />
                                     <TableColumn fx:id="dColumn" prefWidth="75.0" text="d" />
-                                    <TableColumn fx:id="fColumn" prefWidth="75.0" text="func" />
+                                    <TableColumn fx:id="fColumn" prefWidth="75.0" text="f" />
+                                    <TableColumn fx:id="gColumn" prefWidth="75.0" text="func" />
                                 </columns>
                               </TableView>
                            </children>

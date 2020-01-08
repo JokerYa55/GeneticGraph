@@ -36,7 +36,7 @@ public class GraphMutation implements MutationInterface {
                     rand = -random.nextDouble();
                 }
                 //System.out.println("rand = " + rand / 100);
-                AlelInterface<Double> alelNew = new GraphicAlel(i + "", gen.getGenAlel(i).getValue() + rand /10);
+                AlelInterface<Double> alelNew = new GraphicAlel(i + "", gen.getGenAlel(i).getValue() + rand /1000);
                 gen.setGenAlel(i, alelNew);
             }
             t.setGen(gen);

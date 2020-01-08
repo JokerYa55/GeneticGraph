@@ -2,60 +2,57 @@ package beans;
 
 public class PopulationInfo {
 
-    private final int id;
-    private Double a, b, c, d, f;
+    private final String id;
+    private String a, b, c, d, f, g;
 
-    public PopulationInfo(int id, Double a, Double b, Double c, Double d, Double f) {
+    public PopulationInfo(String id, String a, String b, String c, String d, String f, String g) {
         this.id = id;
         this.a = a;
         this.b = b;
         this.c = c;
         this.d = d;
         this.f = f;
+        this.g = g;
     }
 
-    public Double getA() {
+    public String getA() {
         return a;
     }
 
-    public void setA(Double a) {
+    public void setA(String a) {
         this.a = a;
     }
 
-    public Double getB() {
+    public String getB() {
         return b;
     }
 
-    public void setB(Double b) {
+    public void setB(String b) {
         this.b = b;
     }
 
-    public Double getC() {
+    public String getC() {
         return c;
     }
 
-    public void setC(Double c) {
+    public void setC(String c) {
         this.c = c;
     }
 
-    public Double getD() {
+    public String getD() {
         return d;
     }
 
-    public void setD(Double d) {
+    public void setD(String d) {
         this.d = d;
     }
 
-    public Double getF() {
+    public String getF() {
         return f;
     }
 
-    public void setF(Double f) {
+    public void setF(String f) {
         this.f = f;
-    }
-
-    public int getId() {
-        return id;
     }
 
     @Override
@@ -63,4 +60,15 @@ public class PopulationInfo {
         return "PopulationInfo{" + "id=" + id + ", a=" + a + ", b=" + b + ", c=" + c + ", d=" + d + ", f=" + f + '}';
     }
 
+    public String getG() {
+        return g;
+    }
+
+    public void setG(String g) {
+        this.g = g;
+    }
+
+    public String getId() {
+        return id;
+    }
 }

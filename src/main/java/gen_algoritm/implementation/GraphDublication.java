@@ -29,7 +29,7 @@ public class GraphDublication implements DublicateInterface {
         // Получаем среднии значения генов;
         List<PopulationItemInterface> itemList = population.getPipulationItemList();
         int parentCount = population.getPipulationItemList().size();
-        final GenInterface<Double> genNew = new GraphicGen(4);
+        final GenInterface<Double> genNew = new GraphicGen(5);
         List<Double[]> genList = new ArrayList();
         itemList.forEach((t) -> {
             GenInterface<AlelInterface<Double>> gen = (GenInterface<AlelInterface<Double>>) t.getGen();

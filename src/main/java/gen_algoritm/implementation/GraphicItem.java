@@ -14,7 +14,7 @@ public final class GraphicItem implements PopulationItemInterface<Double, GenInt
 
     private static final Logger LOG = Logger.getLogger(GraphicItem.class.getName());
 
-    private GenInterface<Double> gen = new GraphicGen(4);
+    private GenInterface<Double> gen = new GraphicGen(5);
     private final String name;
     // Функция для генов
     private final CalcInterface<Double, Double, AlelInterface<Double>> genFunc;
@@ -81,7 +81,7 @@ public final class GraphicItem implements PopulationItemInterface<Double, GenInt
         //System.out.println("init");
         Random random = new Random();
         this.gen.getGenAsList().clear();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             GraphicAlel alel = new GraphicAlel();
             if (random.nextBoolean()) {
                 alel.setValue(-random.nextDouble());
