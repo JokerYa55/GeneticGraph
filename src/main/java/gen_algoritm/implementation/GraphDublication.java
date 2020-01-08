@@ -50,12 +50,11 @@ public class GraphDublication implements DublicateInterface {
         // Порождаем новые элементы популяции с новым геном
         CalcInterface<Double, Double, AlelInterface<Double>> genFunc = new FuncItem();
         CalcInterface<Double, Double, Double> baseFunc = new BaseFuncItem();
+        // Создаем элемент для копирования
         for (int i = population.getPipulationItemList().size(); i < population.getPopulationItemCount(); i++) {
             PopulationItemInterface item = population.addPopulationItem(new GraphicItem("f_" + population.getStepNum() + "_" + i,
                     genFunc,
-                    baseFunc, x));
-            item.setGen(genNew);
-            //item.calc(x);
+                    baseFunc, x, genNew));
         }
         population.getPipulationItemList().forEach((t) -> {
             System.out.println(String.format("criteria 4 = %s name = %s", t.getCriteriaResult(), t.getName()));

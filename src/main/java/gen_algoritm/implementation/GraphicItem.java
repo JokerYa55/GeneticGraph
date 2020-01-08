@@ -37,6 +37,27 @@ public final class GraphicItem implements PopulationItemInterface<Double, GenInt
         calc(x);
     }
 
+    public GraphicItem(String name, CalcInterface<Double, Double, AlelInterface<Double>> genFunc, CalcInterface<Double, Double, Double> baseFunc, Double[] x, GenInterface gen) {
+        this.name = name;
+        this.baseFunc = baseFunc;
+        this.genFunc = genFunc;
+        this.x = x;
+        this.gen = gen;
+        calc(x);
+    }
+
+    public GraphicItem(GraphicItem item) {
+        this.name = item.name + "_copy";
+        this.genFunc = item.genFunc;
+        this.baseFunc = item.baseFunc;
+        this.x = item.x;
+        item.gen.getGenAsList().forEach((t) -> {
+            AlelInterface<Double> alel = new GraphicAlel(t.getName(), t.getValue());
+            this.getGen().getGenAsList().add(alel);
+        });
+        calc(x);
+    }
+
     @Override
     public String getName() {
         return name;
@@ -84,7 +105,7 @@ public final class GraphicItem implements PopulationItemInterface<Double, GenInt
             CalcResultInterface<Double, Double> res = new FuncItemResult();
             res.setX(itemX);
             res.setY(genFunc.calc(itemX, gen.getGenAsList().stream().map((t) -> {
-                return t; 
+                return t;
             }).toArray(GraphicAlel[]::new)).getY());
             genResultList.add(res);
 
