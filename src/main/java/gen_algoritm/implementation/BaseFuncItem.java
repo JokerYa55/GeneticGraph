@@ -13,7 +13,7 @@ public class BaseFuncItem implements CalcInterface<Double, Double, Double> {
     public CalcResultInterface<Double, Double> calc(Double x) {
         CalcResultInterface<Double, Double> result = new FuncItemResult();
         result.setX(x);
-        result.setY(2 + 3 * x - 6 * Math.pow(x, 2) - 4 * Math.sin(x) * x);
+        result.setY(2 + 3 * x /*- 6 * Math.pow(x, 2)*/ - 4 * Math.sin(x) * x);
         return result;
     }
 

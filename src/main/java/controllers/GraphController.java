@@ -30,7 +30,7 @@ public class GraphController extends AnchorPane {
     private static final int COUNT = 50;
     PopulationInterface population;
     private static final int a = 0;
-    private static double b = 10;
+    private static double b = 5;
     private static final double DELTA_X = (b - a) / COUNT;
     private Parent root;
     Double[] x = new Double[COUNT];
@@ -139,7 +139,7 @@ public class GraphController extends AnchorPane {
         idChart.setCreateSymbols(false);
         idChart.getData().add(series1);
 
-        population.getPipulationItemList().forEach((t) -> {
+        population.getPipulationItemList().stream().limit(2).forEach((t) -> {
             XYChart.Series series2 = new XYChart.Series();
             series2.setName(t.getName());
             List<CalcResultInterface<Double, Double>> genList = t.getGenResultList();
@@ -156,7 +156,7 @@ public class GraphController extends AnchorPane {
     @FXML
     public void btnNextStepClick(ActionEvent actionEvent) {
         LOG.info(String.format("action = %s", actionEvent));
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 50; i++) {
             population.nextStep();
         }
         shiwTable();
