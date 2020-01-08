@@ -5,8 +5,6 @@ import gen_algoritm.CalcResultInterface;
 import gen_algoritm.GenInterface;
 import gen_algoritm.PopulationInterface;
 import gen_algoritm.PopulationItemInterface;
-import gen_algoritm.SelectionInterface;
-import gen_algoritm.implementation.GraphSelection;
 import gen_algoritm.implementation.Population;
 import java.io.IOException;
 import java.util.List;
@@ -82,7 +80,7 @@ public class GraphController extends AnchorPane {
             x[i] = a + i * DELTA_X;
         }
 
-        population = new Population(10, x);
+        population = new Population(50, x);
         idChart.setTitle("Series");
 
     }
@@ -158,7 +156,7 @@ public class GraphController extends AnchorPane {
     @FXML
     public void btnNextStepClick(ActionEvent actionEvent) {
         LOG.info(String.format("action = %s", actionEvent));
-        for (int i = 0; i < 10_000; i++) {
+        for (int i = 0; i < 10000; i++) {
             population.nextStep();
         }
         shiwTable();

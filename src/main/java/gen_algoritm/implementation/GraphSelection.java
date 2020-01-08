@@ -32,9 +32,9 @@ public class GraphSelection implements SelectionInterface {
             }
         });
         
-        population.getPipulationItemList().forEach((t) -> {
-            System.out.println(String.format("criteria 0 = %s name = %s", t.getCriteriaResult(), t.getName()));
-        });
+//        population.getPipulationItemList().forEach((t) -> {
+//            System.out.println(String.format("criteria 0 = %s name = %s", t.getCriteriaResult(), t.getName()));
+//        });
         
         List<PopulationItemInterface> temp = population.getPipulationItemList().stream().limit(2).
                 collect(Collectors.toList());
