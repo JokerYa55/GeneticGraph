@@ -8,6 +8,10 @@ import gen_algoritm.PopulationItemInterface;
 import gen_algoritm.implementation.Population;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,8 +32,8 @@ public class GraphController extends AnchorPane {
 
     private static final int COUNT = 50;
     PopulationInterface population;
-    private static final int A = 0;
-    private static final double B = 10;
+    private static final double A = 0.1;
+    private static final double B = 10.5;
     private static final double DELTA_X = (B - A) / COUNT;
     private Parent root;
     Double[] x = new Double[COUNT];
@@ -63,7 +67,6 @@ public class GraphController extends AnchorPane {
 
 //    @FXML
 //    private TableColumn<PopulationInfo, Double> eColumn;
-
     @FXML
     private TableColumn<PopulationInfo, Double> fColumn;
 
@@ -75,7 +78,7 @@ public class GraphController extends AnchorPane {
 
     @FXML
     private TableColumn<PopulationInfo, Double> funColumn;
-    
+
     public GraphController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/GraphController.fxml"));
         fxmlLoader.setRoot(this);
@@ -177,11 +180,20 @@ public class GraphController extends AnchorPane {
 
     @FXML
     public void btnNextStepClick(ActionEvent actionEvent) {
-        log.info(String.format("action = %s", actionEvent));
-        for (int i = 0; i < 1000; i++) {
-            population.nextStep();
+        try {
+            log.info(String.format("action = %s", actionEvent));
+            CompletableFuture future = CompletableFuture.runAsync(() -> {
+                for (int i = 0; i < 20000; i++) {
+                    population.nextStep();
+                }
+            });
+            future.get();
+            shiwTable();
+            showGraph1();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GraphController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExecutionException ex) {
+            Logger.getLogger(GraphController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        shiwTable();
-        showGraph1();
     }
 }

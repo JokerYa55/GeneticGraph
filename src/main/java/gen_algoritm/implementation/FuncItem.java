@@ -24,6 +24,8 @@ public class FuncItem implements CalcInterface<Double, Double, AlelInterface<Dou
             }
             if (i == 5) {
                 res = res + a.getValue() * Math.cos(x);
+            } else if (i == 6) {
+                res = res + a.getValue() / (x);
             } else if (i < 3) {
                 res = res + a.getValue() * Math.pow(x, i);
             }
