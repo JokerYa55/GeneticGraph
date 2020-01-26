@@ -42,6 +42,8 @@ and open the template in the editor.
                                     <TableColumn fx:id="cColumn" prefWidth="75.0" text="c" />
                                     <TableColumn fx:id="dColumn" prefWidth="75.0" text="d" />
                                     <TableColumn fx:id="fColumn" prefWidth="75.0" text="f" />
+                                    <TableColumn fx:id="gColumn" prefWidth="75.0" text="g" />
+                                    <TableColumn fx:id="hColumn" prefWidth="75.0" text="h" />
                                     <TableColumn fx:id="gColumn" prefWidth="75.0" text="func" />
                                 </columns>
                               </TableView>

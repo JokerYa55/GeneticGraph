@@ -67,6 +67,12 @@ public class GraphController extends AnchorPane {
     @FXML
     private TableColumn<PopulationInfo, Double> gColumn;
 
+    @FXML
+    private TableColumn<PopulationInfo, Double> eColumn;
+    
+    @FXML
+    private TableColumn<PopulationInfo, Double> hColumn;
+    
     public GraphController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/GraphController.fxml"));
         fxmlLoader.setRoot(this);
@@ -132,8 +138,8 @@ public class GraphController extends AnchorPane {
         dColumn.setCellValueFactory(new PropertyValueFactory<>("d"));
         fColumn.setCellValueFactory(new PropertyValueFactory<>("f"));
         gColumn.setCellValueFactory(new PropertyValueFactory<>("g"));
-        gColumn.setCellValueFactory(new PropertyValueFactory<>("e"));
-        gColumn.setCellValueFactory(new PropertyValueFactory<>("h"));
+        eColumn.setCellValueFactory(new PropertyValueFactory<>("e"));
+        hColumn.setCellValueFactory(new PropertyValueFactory<>("h"));
         idDataTable.setItems(populationInfo);
         log.info("----------- shiwTable end --------");
     }
