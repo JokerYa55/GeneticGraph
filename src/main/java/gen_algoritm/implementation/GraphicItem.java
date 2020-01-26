@@ -8,13 +8,13 @@ import gen_algoritm.PopulationItemInterface;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Logger;
+import lombok.extern.java.Log;
 
+@Log
 public final class GraphicItem implements PopulationItemInterface<Double, GenInterface<Double>, Double> {
 
-    private static final Logger LOG = Logger.getLogger(GraphicItem.class.getName());
-
-    private GenInterface<Double> gen = new GraphicGen(5);
+    private static int GEN_LENGTH = 7;
+    private GenInterface<Double> gen = new GraphicGen(GEN_LENGTH);
     private final String name;
     // Функция для генов
     private final CalcInterface<Double, Double, AlelInterface<Double>> genFunc;
@@ -43,7 +43,7 @@ public final class GraphicItem implements PopulationItemInterface<Double, GenInt
         this.genFunc = genFunc;
         this.x = x;
         GenInterface<Double> genNew = new GraphicGen(4);
-        
+
         this.gen = new GraphicGen(gen);
         calc(x);
     }

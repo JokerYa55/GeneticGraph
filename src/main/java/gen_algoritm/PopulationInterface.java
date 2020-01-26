@@ -4,8 +4,6 @@ import java.util.List;
 
 /**
  *
- * @param <T> -Тип аргумента функции
- * @param <V> - Тип функции оценки критерия
  */
 public interface PopulationInterface {
 

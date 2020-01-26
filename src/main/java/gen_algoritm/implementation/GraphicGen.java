@@ -4,7 +4,6 @@ import gen_algoritm.AlelInterface;
 import gen_algoritm.GenInterface;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
 public class GraphicGen implements GenInterface<Double> {
 
