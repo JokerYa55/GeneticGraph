@@ -8,9 +8,13 @@ import gen_algoritm.PopulationItemInterface;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import lombok.Getter;
+import lombok.ToString;
 import lombok.extern.java.Log;
 
 @Log
+@Getter
+@ToString
 public final class GraphicItem implements PopulationItemInterface<Double, GenInterface<Double>, Double> {
 
     private static int GEN_LENGTH = 7;
@@ -61,27 +65,11 @@ public final class GraphicItem implements PopulationItemInterface<Double, GenInt
     }
 
     @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public Double getCriteriaResult() {
-        //LOG.info(String.format("criteriaResult = %s", criteriaResult));
-        return criteriaResult;
-    }
-
-    @Override
-    public GenInterface<Double> getGen() {
-        return gen;
-    }
-
-    @Override
     public PopulationItemInterface<Double, GenInterface<Double>, Double> init() {
         //System.out.println("init");
         Random random = new Random();
         this.gen.getGenAsList().clear();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < GEN_LENGTH; i++) {
             GraphicAlel alel = new GraphicAlel();
             if (random.nextBoolean()) {
                 alel.setValue(-random.nextDouble());
@@ -92,11 +80,6 @@ public final class GraphicItem implements PopulationItemInterface<Double, GenInt
             this.gen.getGenAsList().add(alel);
         }
         return this;
-    }
-
-    // Получить расчитаные значения функции в точках
-    public List<CalcResultInterface<Double, Double>> getResultList() {
-        return genResultList;
     }
 
     @Override
@@ -136,23 +119,8 @@ public final class GraphicItem implements PopulationItemInterface<Double, GenInt
     }
 
     @Override
-    public List<CalcResultInterface<Double, Double>> getBaseResultList() {
-        return baseResultList;
-    }
-
-    @Override
-    public List<CalcResultInterface<Double, Double>> getGenResultList() {
-        return genResultList;
-    }
-
-    @Override
     public void setGen(GenInterface<Double> gen) {
         this.gen = gen;
-    }
-
-    @Override
-    public String toString() {
-        return "GraphicItem{" + "gen=" + gen + ", name=" + name + ", genFunc=" + genFunc + ", baseFunc=" + baseFunc + ", criteriaResult=" + criteriaResult + ", baseResultList=" + baseResultList + ", genResultList=" + genResultList + '}';
     }
 
 }
