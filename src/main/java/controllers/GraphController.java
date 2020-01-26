@@ -166,7 +166,7 @@ public class GraphController extends AnchorPane {
     @FXML
     public void btnNextStepClick(ActionEvent actionEvent) {
         LOG.info(String.format("action = %s", actionEvent));
-        for (int i = 0; i < 50000; i++) {
+        for (int i = 0; i < 20; i++) {
             population.nextStep();
         }
         shiwTable();

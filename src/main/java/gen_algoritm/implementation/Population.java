@@ -10,15 +10,13 @@ import gen_algoritm.PopulationItemInterface;
 import gen_algoritm.SelectionInterface;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+import lombok.Getter;
+import lombok.extern.java.Log;
 
-/**
- *
- * @author admin
- */
+@Log
+@Getter
 public class Population implements PopulationInterface {
 
-    private static final Logger LOG = Logger.getLogger(Population.class.getName());
     private final List<PopulationItemInterface> populationItemList;
     private int stepNum = 0;
     private final Double[] x;
@@ -29,7 +27,7 @@ public class Population implements PopulationInterface {
     private int populationItemCount;
 
     public Population(int populationCount, Double... x) {
-        LOG.info("Population constructor");
+        log.info("Population constructor");
         this.populationItemCount = populationCount;
         this.x = x;
         this.dublicateGraph = new GraphDublication(x);
