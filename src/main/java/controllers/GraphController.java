@@ -8,7 +8,6 @@ import gen_algoritm.PopulationItemInterface;
 import gen_algoritm.implementation.Population;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,16 +21,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lombok.extern.java.Log;
 
+@Log
 public class GraphController extends AnchorPane {
-
-    private static final Logger LOG = Logger.getLogger(GraphController.class.getName());
 
     private static final int COUNT = 50;
     PopulationInterface population;
-    private static final int a = 0;
-    private static double b = 10;
-    private static final double DELTA_X = (b - a) / COUNT;
+    private static final int A = 0;
+    private static final double B = 10;
+    private static final double DELTA_X = (B - A) / COUNT;
     private Parent root;
     Double[] x = new Double[COUNT];
 
@@ -67,7 +66,7 @@ public class GraphController extends AnchorPane {
 
     @FXML
     private TableColumn<PopulationInfo, Double> gColumn;
-    
+
     public GraphController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/GraphController.fxml"));
         fxmlLoader.setRoot(this);
@@ -80,7 +79,7 @@ public class GraphController extends AnchorPane {
         }
 
         for (int i = 0; i < COUNT; i++) {
-            x[i] = a + i * DELTA_X;
+            x[i] = A + i * DELTA_X;
         }
 
         population = new Population(100, x);
@@ -109,7 +108,7 @@ public class GraphController extends AnchorPane {
 //        });
 
         population.getPipulationItemList().forEach((PopulationItemInterface t) -> {
-            System.out.println(String.format("criteria 5 = %s name = %s", t.getCriteriaResult(), t.getName()));
+            log.info(String.format("criteria 5 = %s name = %s", t.getCriteriaResult(), t.getName()));
             Double[] gen = ((GenInterface) t.getGen()).getGenAsArray();
             populationInfo.add(new PopulationInfo(t.getName(),
                     String.format("%f", gen[0]),
@@ -117,6 +116,8 @@ public class GraphController extends AnchorPane {
                     String.format("%f", gen[2]),
                     String.format("%f", gen[3]),
                     String.format("%f", gen[4]),
+                    String.format("%f", gen[5]),
+                    String.format("%f", gen[6]),
                     String.format("%f", (Double) t.getCriteriaResult())));
         });
 
@@ -131,8 +132,10 @@ public class GraphController extends AnchorPane {
         dColumn.setCellValueFactory(new PropertyValueFactory<>("d"));
         fColumn.setCellValueFactory(new PropertyValueFactory<>("f"));
         gColumn.setCellValueFactory(new PropertyValueFactory<>("g"));
+        gColumn.setCellValueFactory(new PropertyValueFactory<>("e"));
+        gColumn.setCellValueFactory(new PropertyValueFactory<>("h"));
         idDataTable.setItems(populationInfo);
-        LOG.info("----------- shiwTable end --------");
+        log.info("----------- shiwTable end --------");
     }
 
     public void showGraph1() {
@@ -165,7 +168,7 @@ public class GraphController extends AnchorPane {
 
     @FXML
     public void btnNextStepClick(ActionEvent actionEvent) {
-        LOG.info(String.format("action = %s", actionEvent));
+        log.info(String.format("action = %s", actionEvent));
         for (int i = 0; i < 20; i++) {
             population.nextStep();
         }

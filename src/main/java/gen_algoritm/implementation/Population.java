@@ -20,11 +20,11 @@ public class Population implements PopulationInterface {
     private final List<PopulationItemInterface> populationItemList;
     private int stepNum = 0;
     private final Double[] x;
-    private SelectionInterface selctionGraph = new GraphSelection();
-    private DublicateInterface dublicateGraph;
-    private MutationInterface mutatationGraph;
+    private final SelectionInterface selctionGraph = new GraphSelection();
+    private final DublicateInterface dublicateGraph;
+    private final MutationInterface mutatationGraph;
 
-    private int populationItemCount;
+    private final int populationItemCount;
 
     public Population(int populationCount, Double... x) {
         log.info("Population constructor");

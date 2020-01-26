@@ -4,7 +4,11 @@ import gen_algoritm.AlelInterface;
 import gen_algoritm.GenInterface;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@ToString
 public class GraphicGen implements GenInterface<Double> {
 
     private final List<AlelInterface<Double>> alelList;
@@ -14,8 +18,6 @@ public class GraphicGen implements GenInterface<Double> {
         this.getGenAsList().addAll(item.getGenAsList());
     }
 
-    
-    
     public GraphicGen(int genAlelCount) {
         alelList = new ArrayList<>(genAlelCount);
         for (int i = 0; i < genAlelCount; i++) {
@@ -45,11 +47,4 @@ public class GraphicGen implements GenInterface<Double> {
         return alelList.get(i);
     }
 
-    @Override
-    public String toString() {
-        return "GraphicGen{" + "alelList=" + alelList + '}';
-    }
-
-    
-    
 }

@@ -9,27 +9,22 @@ import gen_algoritm.PopulationItemInterface;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
 
-/**
- *
- * @author vasil
- */
+@Log
+@AllArgsConstructor
 public class GraphDublication implements DublicateInterface {
-
-    private static final Logger LOG = Logger.getLogger(GraphDublication.class.getName());
+    private static final int GEN_LEN = 7;
     private final Double[] x;
-
-    public GraphDublication(Double... x) {
-        this.x = x;
-    }
 
     @Override
     public PopulationInterface dublicate(PopulationInterface population) {
-        LOG.info("-------------- dublicate --------------");
+        log.info("-------------- dublicate --------------");
         // Получаем среднии значения генов;
         List<PopulationItemInterface> itemList = population.getPipulationItemList();
         int parentCount = population.getPipulationItemList().size();
-        final GenInterface<Double> genNew = new GraphicGen(5);
+        final GenInterface<Double> genNew = new GraphicGen(GEN_LEN);
         List<Double[]> genList = new ArrayList();
         itemList.forEach((t) -> {
             GenInterface<AlelInterface<Double>> gen = (GenInterface<AlelInterface<Double>>) t.getGen();
@@ -60,7 +55,7 @@ public class GraphDublication implements DublicateInterface {
 //            System.out.println(String.format("criteria 4 = %s name = %s", t.getCriteriaResult(), t.getName()));
 //        });
 
-        LOG.info("-------------- dublicate end ----------");
+        log.info("-------------- dublicate end ----------");
         return population;
     }
 
