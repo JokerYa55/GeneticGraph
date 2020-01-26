@@ -23,7 +23,7 @@ public class FuncItem implements CalcInterface<Double, Double, AlelInterface<Dou
                 res = res + a.getValue() * Math.sin(x);
             }
             if (i == 5) {
-                res = res + a.getValue() * Math.sin(param[i + 1].getValue() * x);
+                res = res + a.getValue() * Math.cos(x);
             } else if (i < 3) {
                 res = res + a.getValue() * Math.pow(x, i);
             }
